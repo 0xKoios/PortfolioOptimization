@@ -1,0 +1,3 @@
+ccxt~=2.6.39
+pandas~=1.5.3
+riskfolio-lib~=4.0.3

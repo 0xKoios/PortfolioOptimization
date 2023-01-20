@@ -1,0 +1,10 @@
+version: '3'
+services:
+    portfolio_optimization:
+        build:
+            context: ./
+            dockerfile: .
+        restart: unless-stopped
+        container_name: portfolio_optimization
+        volumes:
+            - "./user_data:/freqtrade/user_data"

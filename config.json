@@ -1,0 +1,32 @@
+{
+    "assets": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "AAVE",
+        "MKR",
+        "COMP",
+        "SOL",
+        "GMX",
+        "DYDX",
+        "SNX"
+    ],
+    "quote": "USDT",
+    "weights": {
+        "crypto_currency": {
+            "BTC": 1.0
+        },
+        "lending": {
+            "AAVE": 0.6,
+            "MKR": 0.3,
+            "COMP": 0.1
+        },
+        "smart_contract_platform": {
+            "ETH": 0.55,
+            "BNB": 0.35,
+            "SOL": 0.1
+        },
+        "dex_derivative_protocol": {
+            "GMX": 0.7, "DYDX": 0.15, "SNX": 0.15}
+    }
+}
