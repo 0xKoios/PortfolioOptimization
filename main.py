@@ -2,10 +2,11 @@ import ccxt
 import json
 import pandas as pd
 from riskfolio import HCPortfolio
+from datetime import datetime
+
 
 with open('config.json') as file:
     config = json.load(file)
-    # มี error asset ไม่อยู่ใน List, ใส่ชื่อเหรียญผิด
 
 
 def fetch_historical_candles():
@@ -80,8 +81,9 @@ def main():
         index = config['weights'][sector].keys()
         df_weight_sector = pd.DataFrame({'weight': weight}, index=index)
         list_weights_df.append(df_weight_sector['weight'] * hrp_weights.T[sector]['weights'])
-    df_weights = pd.concat(list_weights_df, axis=0).T.to_frame().sum()
-    df_weights.to_csv('weights_optimization.csv', index=False)
+    df_weights = pd.concat(list_weights_df, axis=0).T.to_frame()
+    date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    df_weights.to_csv(f'weights/{date}.csv')
 
 
 if __name__ == '__main__':
