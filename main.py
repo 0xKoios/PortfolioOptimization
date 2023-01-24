@@ -1,12 +1,25 @@
 import ccxt
 import json
 import pandas as pd
+import itertools
 from riskfolio import HCPortfolio
 from datetime import datetime
 
 
 with open('config.json') as file:
     config = json.load(file)
+    assets = config['assets']
+    set_assets = set(assets)
+    weights = [item.keys() for item in config['weights'].values()]
+    weights = list(itertools.chain.from_iterable(weights))
+    set_weights = set(weights)
+    for sector in config['weights']:
+        assert 0.99 < sum(config['weights'][sector].values()) <= 1, f"The {sector}'s overall weight does not equal 1.0."
+    assert len(assets) == len(set_assets), f"There are duplicate assets in the list."
+    difference = set_weights.difference(set_assets)
+    assert difference == set(), f"The weights list does not contain {difference}."
+    difference = set_assets.difference(set_weights)
+    assert difference == set(), f"The assets list does not contain {difference}."
 
 
 def fetch_historical_candles():
